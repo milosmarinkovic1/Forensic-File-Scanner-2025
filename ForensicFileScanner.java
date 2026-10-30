@@ -66,7 +66,7 @@ public class ForensicFileScanner {
         File file = new File(path); // Creates a new File instance by converting the given pathname string
 
         if (!file.exists()) {  //specific file or directory, identified by its path, is present and accessible on a computer's storage
-            System.out.println("❌ Fajl ne postoji!");
+            System.out.println("X Fajl ne postoji!");
             return;
         }
 
@@ -82,7 +82,7 @@ public class ForensicFileScanner {
 
         if (!extension.isEmpty() && !realType.contains("Nepoznato")) {
             if (isExtensionMismatch(extension, realType)) {      // proverava da li se ekstenzija fajla poklapa sa njegovim stvarnim tipom
-                System.out.println("⚠️  UPOZORENJE: Ekstenzija se NE poklapa sa stvarnim tipom!");
+                System.out.println(" !!!  UPOZORENJE: Ekstenzija se NE poklapa sa stvarnim tipom!");
             } else {
                 System.out.println("✓ Ekstenzija i tip se poklapaju.");
             }
@@ -101,7 +101,7 @@ public class ForensicFileScanner {
         File folder = new File(path);
 
         if (!folder.exists() || !folder.isDirectory()) {
-            System.out.println("❌ Folder ne postoji!");
+            System.out.println("X Folder ne postoji!");
             return;
         }
 
@@ -129,10 +129,10 @@ public class ForensicFileScanner {
                 String extension = getFileExtension(file); // Gleda ime fajla
                 String realType = detectFileType(file);  // Gleda sadržaj fajla
 
-                String status = "✅ OK";
+                String status = " OK";
                 if (!extension.isEmpty() && !realType.contains("Nepoznato") &&
                         isExtensionMismatch(extension, realType)) {
-                    status = "🔴 SUMNJIVO";
+                    status = " SUMNJIVO !!! ";
                     suspiciousCount++;
                 }
 
@@ -173,7 +173,7 @@ public class ForensicFileScanner {
             // NE menjamo postojeći TXT u EXE  već  se kreira fajl sa .txt imenom  ali mu ubacuješ EXE magic number (MZ)
             /*
             * Operativni sistem prilikom izvršavanja fajla proverava njegov sadržaj (magic number),
-            *  tako da fajl sa TXT ekstenzijom, ali EXE potpisom, može biti izvršen kao program ako se pokrene na odgovarajući način.
+            *  tako da fajl sa TXT ekstenzijom ali EXE potpisom, može biti izvršen kao program ako se pokrene na odgovarajući način.
             *
             * “double extension” trik
             *
@@ -223,7 +223,7 @@ public class ForensicFileScanner {
             System.out.println("5. beleške.txt    -> Tekstualni fajl (OK)");
 
         } catch (IOException e) {  // input/output exception
-            System.out.println("❌ Greška pri kreiranju fajlova: " + e.getMessage());
+            System.out.println("X Greška pri kreiranju fajlova: " + e.getMessage());
         }
     }
 
